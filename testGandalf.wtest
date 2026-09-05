@@ -1,0 +1,57 @@
+import gandalf.*
+import zonas.*
+
+describe "Tests para Gandalf y su calculo de poder" {
+
+  test "Gandalf con todas sus armas y todaaaa su vida tiene poder de 2800" {
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(glamdring)
+    assert.equals(2800, gandalf.poder())
+  }
+  test "Gandalf sin armas y con 80 de vida tiene poder de 1200" {
+    gandalf.vida(80)
+    assert.equals(1200, gandalf.poder())
+  }
+
+  test "Poder de Gandalf con 5 de vida y su báculo, es de 2300" {
+    gandalf.agregarArma(baculo)
+    gandalf.vida(5)
+    assert.equals(2300, gandalf.poder())
+  }
+
+  test "Poder de Gandalf con 30 de vida, su báculo y su espada pero versión enana, es de 1650" {
+    const espadaEnana = fabricaDeEspadas.deOrigen(enano)
+    
+    gandalf.agregarArma(baculo)
+    gandalf.agregarArma(espadaEnana)
+    gandalf.vida(30)
+    assert.equals(1650, gandalf.poder())
+  }
+
+}
+
+describe "Tests para Zonas" {
+  test "Gandalf full vida y con sus armas, puede atravesar Lebennin" {
+    gandalf.agregarArma(glamdring)
+    gandalf.agregarArma(baculo)
+
+    assert.that(lebennin.puedeSerAtravesadaPor(gandalf))
+  }
+
+  test "Gandalf sin armas y con 11 de vida NO puede atravesar Lebennin" {
+    gandalf.vida(11)
+    assert.notThat(lebennin.puedeSerAtravesadaPor(gandalf))
+  }
+
+  test "Gandalf sin armas y con 11 de vida NO puede atravesar Minas Tirith" {
+    gandalf.vida(11)
+    assert.notThat(minasTirith.puedeSerAtravesadaPor(gandalf))
+  }
+
+  test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith" {
+    gandalf.agregarArma(glamdring)
+    gandalf.agregarArma(baculo)
+    assert.that(caminoDeGondor.puedeSerAtravesadoPor(gandalf))
+  }
+
+}
