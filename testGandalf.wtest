@@ -35,23 +35,23 @@ describe "Tests para Zonas" {
     gandalf.agregarArma(glamdring)
     gandalf.agregarArma(baculo)
 
-    assert.that(lebennin.puedeSerAtravesadaPor(gandalf))
+    assert.that(gandalf.puedeAtravesar(lebennin))
   }
 
   test "Gandalf sin armas y con 11 de vida NO puede atravesar Lebennin" {
     gandalf.vida(11)
-    assert.notThat(lebennin.puedeSerAtravesadaPor(gandalf))
+    assert.notThat(gandalf.puedeAtravesar(lebennin))
   }
 
   test "Gandalf sin armas y con 11 de vida NO puede atravesar Minas Tirith" {
     gandalf.vida(11)
-    assert.notThat(minasTirith.puedeSerAtravesadaPor(gandalf))
+    assert.notThat(gandalf.puedeAtravesar(minasTirith))
   }
 
   test "Gandalf full vida y con sus armas, puede atravesar el camino compuesto por Lebennin y Minas Tirith" {
     gandalf.agregarArma(glamdring)
     gandalf.agregarArma(baculo)
-    assert.that(caminoDeGondor.puedeSerAtravesadoPor(gandalf))
+    assert.that(gandalf.puedeAtravesar(caminoDeGondor))
   }
 
 }
