@@ -1,8 +1,9 @@
-import gandalf.*
+import guerreros.*
 import zonas.*
+import armas.*
 
 describe "Tests para Gandalf y su calculo de poder" {
-
+  const gandalf = new Maia()
   test "Gandalf con todas sus armas y todaaaa su vida tiene poder de 2800" {
     gandalf.agregarArma(baculo)
     gandalf.agregarArma(glamdring)
@@ -20,7 +21,7 @@ describe "Tests para Gandalf y su calculo de poder" {
   }
 
   test "Poder de Gandalf con 30 de vida, su báculo y su espada pero versión enana, es de 1650" {
-    const espadaEnana = fabricaDeEspadas.deOrigen(enano)
+    const espadaEnana = new Espada(multiplicador = 10 , origen = enano)
     
     gandalf.agregarArma(baculo)
     gandalf.agregarArma(espadaEnana)
@@ -31,6 +32,7 @@ describe "Tests para Gandalf y su calculo de poder" {
 }
 
 describe "Tests para Zonas" {
+  const gandalf = new Maia()
   test "Gandalf full vida y con sus armas, puede atravesar Lebennin" {
     gandalf.agregarArma(glamdring)
     gandalf.agregarArma(baculo)
@@ -52,6 +54,13 @@ describe "Tests para Zonas" {
     gandalf.agregarArma(glamdring)
     gandalf.agregarArma(baculo)
     assert.that(gandalf.puedeAtravesar(caminoDeGondor))
+  }
+
+  test "Gandalf full vida y con sus armas, atraviesa el camino compuesto por Lebennin y Minas Tirith; y su vida queda en 90" {
+    gandalf.agregarArma(glamdring)
+    gandalf.agregarArma(baculo)
+    gandalf.atravesar(caminoDeGondor)
+    assert.equals(90, gandalf.vida())
   }
 
 }
