@@ -3,6 +3,8 @@ import zonas.*
 import armas.*
 
 describe "Tests para Gandalf y su calculo de poder" {
+  const glamdring = new Espada(multiplicador = 10 , origen = elfico)
+  const baculo = new Baculo(poder = 400)
   const gandalf = new Maia()
   test "Gandalf con todas sus armas y todaaaa su vida tiene poder de 2800" {
     gandalf.agregarArma(baculo)
@@ -32,6 +34,8 @@ describe "Tests para Gandalf y su calculo de poder" {
 }
 
 describe "Tests para Zonas" {
+  const glamdring = new Espada(multiplicador = 10 , origen = elfico)
+  const baculo = new Baculo(poder = 400)
   const gandalf = new Maia()
   test "Gandalf full vida y con sus armas, puede atravesar Lebennin" {
     gandalf.agregarArma(glamdring)

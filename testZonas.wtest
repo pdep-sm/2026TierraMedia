@@ -1,0 +1,40 @@
+import guerreros.*
+import zonas.*
+import armas.*
+
+describe "Tests para Zonas" {
+  const glamdring = new Espada(multiplicador = 10 , origen = elfico)
+  const baculo = new Baculo(poder = 400)
+  const gandalf = new Maia(vida = 100)
+  const frodo = new Hobbit(vida = 80)
+  const minasTirith = new Zona( requerimiento = new RequerimientoItem(item="lembas", cantidad=10))
+  const bosqueFangorn = new Zona( requerimiento = new RequerimientoGuerrero(criterio={ g => g.tieneArmas()}))
+  const edoras = new Zona(requerimiento = noRequerimiento)
+
+  test "El grupo formado por Gandalf no puede pasar por Minas Tirith" {
+    assert.notThat(minasTirith.esTransitablePor([gandalf]))
+  }
+
+test "El grupo formado por Gandalf y Frodo, ambos sin armas, no puede pasar por el Bosque de Fangorn" {
+    assert.notThat(bosqueFangorn.esTransitablePor([gandalf,frodo]))
+  }
+
+test "El grupo formado por Gandalf con armas y Frodo sin armas, puede pasar por el Bosque de Fangorn" {
+    gandalf.agregarArma(baculo)
+    assert.that(bosqueFangorn.esTransitablePor([gandalf,frodo]))
+  }
+
+  test "El grupo formado por Gandalf no puede atravesar un camino de Minas Tirith y Bosque de Fangorn" {
+    const camino = new Camino(zonas = [minasTirith, bosqueFangorn])
+    gandalf.agregarArma(baculo)
+    assert.notThat(camino.esTransitablePor([gandalf]))
+  }
+
+  test "El grupo formado por Gandalf puede atravesar un camino de Edoras y Bosque de Fangorn" {
+    const camino = new Camino(zonas = [edoras, bosqueFangorn])
+    gandalf.agregarArma(glamdring)
+    assert.that(camino.esTransitablePor([gandalf]))
+  }
+
+
+}
